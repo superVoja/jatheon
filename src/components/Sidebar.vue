@@ -17,7 +17,7 @@
 .sidebar {
   background-color: #e1e7e9;
   width: 250px;
-  height: 1024px;
+  height: 100%;
 
   .logo {
     display: block;

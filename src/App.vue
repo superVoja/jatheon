@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="container">
-      <Sidebar />
-      <router-view></router-view>
+      <Header class="header" />
+      <Sidebar class="sidebar" />
+      <router-view class="main"></router-view>
     </div>
   </div>
 </template>
@@ -10,9 +11,10 @@
 <script>
 import Sidebar from "./components/Sidebar";
 
+import Header from "./components/Header.vue";
 export default {
   name: "App",
-  components: { Sidebar },
+  components: { Sidebar, Header },
 };
 </script>
 <style lang="scss">
@@ -26,8 +28,23 @@ body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
 }
+
 .container {
-  display: flex;
-  width: 100%;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main"
+    "sidebar footer";
+}
+
+.header {
+  grid-area: header;
+}
+.sidebar {
+  grid-row: sidebar;
+}
+.main {
+  grid-column: main;
 }
 </style>
