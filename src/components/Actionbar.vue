@@ -1,25 +1,26 @@
 <template>
   <div class="action-bar">
-    <div>
+    <!-- USER DROPDOWN MENU -->
+    <div class="user-dropdown">
       <div
         class="dropdown-btn"
-        @click="showDropdown = !showDropdown"
-        :class="{ active: showDropdown }"
+        @click="showUserDropdown = !showUserDropdown"
+        :class="{ active: showUserDropdown }"
       >
         <p v-if="!userIds.length">No user selected</p>
         <p v-else>{{ userIds[0] }}</p>
 
-        <div class="btn-arrow" :class="{ active: showDropdown }">
+        <div class="btn-arrow" :class="{ active: showUserDropdown }">
           <img src="../assets/icons/icn-arrow-down.svg" alt="" />
         </div>
       </div>
-      <div class="dropdown" v-if="showDropdown">
+      <div class="dropdown" v-if="showUserDropdown">
         <ul>
           <input
             type="text"
             placeholder="Search for a user..."
             v-model="search"
-            v-if="showDropdown"
+            v-if="showUserDropdown"
             v-on:input="showSelectAll = !showSelectAll"
           />
           <li v-if="showSelectAll">
@@ -29,7 +30,7 @@
                 type="checkbox"
                 @click="selectAll"
                 v-model="allSelected"
-                v-if="showDropdown"
+                v-if="showUserDropdown"
               />
               <span class="checkmark"></span>
             </label>
@@ -50,6 +51,63 @@
         </ul>
       </div>
     </div>
+    <!-- ACTION DROPDOWN MENU -->
+    <div class="action-dropdown">
+      <div
+        class="dropdown-btn"
+        @click="showActionDropdown = !showActionDropdown"
+        :class="{ active: showActionDropdown }"
+      >
+        <p v-if="!actionIds.length">All actions</p>
+        <p v-else>{{ actionIds.length }} selected</p>
+
+        <div class="btn-arrow" :class="{ active: showActionDropdown }">
+          <img src="../assets/icons/icn-arrow-down.svg" alt="" />
+        </div>
+      </div>
+      <div class="dropdown" v-if="showActionDropdown">
+        <ul>
+          <li v-if="showSelectAll">
+            <label class="checkbox-wrapp"
+              >Select all
+              <input
+                type="checkbox"
+                @click="selectAllActions"
+                v-model="allActionsSelected"
+                v-if="showActionDropdown"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <li v-for="(action, i) in actions" :key="i">
+            <label class="checkbox-wrapp"
+              >{{ action.text }}
+
+              <input
+                type="checkbox"
+                :value="action.text"
+                v-model="actionIds"
+                @focus="selected == true"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- SEARCH -->
+    <div>
+      <input
+        type="text"
+        class="dropdown-btn search-input"
+        placeholder="Filter results..."
+      />
+    </div>
+    <div>
+      <button class="search-btn" :class="{ active: userIds.length > 0 }">
+        Search Now
+      </button>
+    </div>
   </div>
 </template>
 
@@ -59,22 +117,38 @@ export default {
 
   data() {
     return {
-      showDropdown: false,
+      showUserDropdown: false,
+      showActionDropdown: false,
       search: "",
       selected: false,
       showSelectAll: true,
       allSelected: false,
+      allActionsSelected: false,
       userIds: [],
+      actionIds: [],
       users: [
-        { text: "abraham.lincoln@company.com", value: "A" },
-        { text: "bonaparta.nap@company.com", value: "B" },
-        { text: "clark.kent@company.com", value: "C" },
-        { text: "dereck.trotter@company.com", value: "D" },
-        { text: "garry.oldman@company.com", value: "E" },
-        { text: "henk.azaria@company.com", value: "F" },
-        { text: "john@company.com", value: "G" },
-        { text: "lincoln@company.com", value: "H" },
-        { text: "ozzy.osborn@company.com", value: "I" },
+        { text: "abraham.lincoln@company.com" },
+        { text: "bonaparta.nap@company.com" },
+        { text: "clark.kent@company.com" },
+        { text: "dereck.trotter@company.com" },
+        { text: "garry.oldman@company.com" },
+        { text: "henk.azaria@company.com" },
+        { text: "john@company.com" },
+        { text: "lincoln@company.com" },
+        { text: "ozzy.osborn@company.com" },
+      ],
+      actions: [
+        { text: "Create Client" },
+        { text: "Create User" },
+        { text: "Edit Client" },
+        { text: "Edit User" },
+        { text: "Change Profile Info" },
+        { text: "Delete User" },
+        { text: "Delete Client" },
+        { text: "Deactivate User" },
+        { text: "Activate User" },
+        { text: "Activate Client" },
+        { text: "Log In" },
       ],
     };
   },
@@ -82,9 +156,16 @@ export default {
     selectAll() {
       this.userIds = [];
       if (!this.allSelected) {
-        console.log("all selected");
         for (this.user in this.filteredList) {
           this.userIds.push(this.users[this.user].text.toString());
+        }
+      }
+    },
+    selectAllActions() {
+      this.actionIds = [];
+      if (!this.allActionsSelected) {
+        for (this.action in this.actions) {
+          this.actionIds.push(this.actions[this.action].text.toString());
         }
       }
     },
@@ -100,7 +181,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// Scroll bar
+/* Scrollbar Style */
 ::-webkit-scrollbar {
   width: 6px;
   margin-top: 60px;
@@ -187,7 +268,9 @@ export default {
 }
 .action-bar {
   background-color: #ffffff;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
   align-items: center;
   height: 70px;
   border-bottom: 1px solid #cfcfcf;
@@ -271,28 +354,57 @@ export default {
       }
     }
   }
+}
+/* Input Style */
+input[type="text"] {
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  border: 0;
+  outline: 0;
+  width: 243px;
+  height: 38px;
 
-  input[type="text"] {
-    background-color: #f4f4f4;
+  &::placeholder {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    color: #9b9b9b;
+
+    font-size: 14px;
+    line-height: 18px;
+    width: 173px;
+    text-align: left;
+  }
+  &.search-input {
+    background-color: #ffffff;
+    border: 1px solid #9b9b9b;
     border-radius: 4px;
-    border: 0;
-    outline: 0;
-    width: 243px;
+    width: 250px;
     height: 38px;
-
-    &::placeholder {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-left: 17px;
-      color: #9b9b9b;
-      background-image: url(../assets/icons/icn-search.svg);
-      background-position: center left;
-      background-repeat: no-repeat;
-      font-size: 14px;
-      line-height: 18px;
-      width: 173px;
-      text-align: left;
+    &:hover {
+      border-color: #00a88d;
     }
+  }
+}
+/* Search Button Style */
+.search-btn {
+  background-color: #cfcfcf;
+  border-radius: 4px;
+  width: 113px;
+  height: 38px;
+
+  color: #9b9b9b;
+
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+
+  border: 0;
+  outline: 0;
+
+  &.active {
+    background-color: #00a88d;
+    color: #ffffff;
   }
 }
 </style>
