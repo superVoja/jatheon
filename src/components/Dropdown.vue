@@ -24,10 +24,7 @@ export default {
   border: 1px solid #cfcfcf;
   border-radius: 4px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3);
-  position: absolute;
-  right: 20px;
-  top: 56px;
-  transition: 0.3s ease-in-out;
+
   ul {
     list-style: none;
     margin: 0;

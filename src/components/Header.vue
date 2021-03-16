@@ -15,7 +15,7 @@
       >
         <img src="../assets/icons/icn-arrow-down.svg" alt="" />
       </button>
-      <Dropdown :items="links" v-if="showMenu" />
+      <Dropdown :items="links" v-if="showMenu" class="dropdown" />
     </div>
   </div>
 </template>
@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       showMenu: false,
-      isActive: false,
       links: [
         {
           title: "Account Settings",
@@ -51,11 +50,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    toggleMenu() {
-      this.showMenu = !this.showMenu;
-    },
   },
 };
 </script>
@@ -136,9 +130,15 @@ export default {
       outline: 0;
       background-color: transparent;
       transition: 0.3s ease-in;
+      position: relative;
       &.active {
         transform: rotate(180deg);
       }
+    }
+    .dropdown {
+      position: absolute;
+      right: 20px;
+      top: 56px;
     }
   }
 }
