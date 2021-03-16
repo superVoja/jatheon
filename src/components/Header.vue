@@ -54,6 +54,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+$small: 300px;
+$medium: 900px;
+$large: 1300px;
 .header {
   display: flex;
   justify-content: space-between;
@@ -79,8 +82,11 @@ export default {
     outline: 0;
     background-color: inherit;
     border-radius: inherit;
-    width: 515px;
-    height: 38px;
+    width: 239px;
+
+    @media screen and (min-width: $medium) {
+      width: 515px;
+    }
 
     &::placeholder {
       color: #9b9b9b;
@@ -139,6 +145,12 @@ export default {
       position: absolute;
       right: 20px;
       top: 56px;
+      @media screen and (max-width: $small) {
+        right: 5px;
+      }
+      @media screen and (min-width: $medium) {
+        right: 0;
+      }
     }
   }
 }

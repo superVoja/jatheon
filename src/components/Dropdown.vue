@@ -18,6 +18,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .menu {
+  z-index: 10;
   width: 230px;
   padding: 10px 12px;
   background-color: #ffffff;

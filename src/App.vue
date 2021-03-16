@@ -19,6 +19,7 @@ export default {
 </script>
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
@@ -30,21 +31,22 @@ body {
 }
 
 .container {
+  width: 100%;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: auto 1fr 1fr;
   grid-template-areas:
-    "sidebar header"
-    "sidebar main"
-    "sidebar footer";
+    "sidebar header header"
+    "sidebar main main"
+    "sidebar main main";
 }
 
 .header {
   grid-area: header;
 }
 .sidebar {
-  grid-row: sidebar;
+  grid-area: sidebar;
 }
 .main {
-  grid-column: main;
+  grid-area: main;
 }
 </style>
