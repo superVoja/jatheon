@@ -119,7 +119,7 @@
         :class="{
           active: showActionDropdown,
           selected: !userIds.length < 1,
-          disabled: !userIds.length < 1,
+          disabled: userIds.length < 1,
         }"
         :disabled="userIds.length < 1"
       >
@@ -435,11 +435,9 @@ $large: 1300px;
   align-items: center;
   justify-content: space-between;
   position: relative;
-
-  .disabled {
+  &.disabled {
     background-color: #f4f4f4;
   }
-
   &.selected {
     background-color: #ffffff;
     //border: 1px solid #00a88d;
