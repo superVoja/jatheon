@@ -19,7 +19,14 @@ export default {
 </script>
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
-
+* {
+  box-sizing: border-box;
+}
+button {
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+}
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;

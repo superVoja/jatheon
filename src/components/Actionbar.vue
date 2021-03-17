@@ -128,7 +128,7 @@
       </button>
       <div class="dropdown" v-if="showActionDropdown">
         <ul>
-          <li v-if="showSelectAll">
+          <li>
             <label class="checkbox-wrapp"
               >Select all
               <input
@@ -160,11 +160,10 @@
     <div class="search-results">
       <input
         type="text"
-        class="dropdown-btn search-input"
         placeholder="Filter results..."
         v-model="searchResults"
       />
-      <button v-show="searchResults" @click="clearInput">
+      <button v-show="searchResults" @click="clearSearchInput">
         <svg
           width="10px"
           height="10px"
@@ -285,6 +284,9 @@ export default {
     },
     clearInput() {
       this.search = "";
+    },
+    clearSearchInput() {
+      this.searchResults = "";
     },
   },
   computed: {
@@ -419,12 +421,15 @@ $large: 1300px;
 
   color: #9b9b9b;
   border-radius: 4px;
-  min-width: 260px;
+  min-width: 267px;
   height: 38px;
   outline: 0;
+  padding-right: 14px;
+  padding-left: 12px;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
 
   &.selected {
@@ -433,8 +438,6 @@ $large: 1300px;
     color: #3e4543;
   }
   .btn-arrow {
-    border: 0;
-    outline: 0;
     background-color: transparent;
     transition: 0.3s ease-in;
     position: relative;
@@ -449,8 +452,6 @@ $large: 1300px;
   }
 
   p {
-    padding: 10px 12px;
-
     font-size: 14px;
     line-height: 18px;
     width: 215px;
@@ -463,7 +464,7 @@ $large: 1300px;
   border: 1px solid #cfcfcf;
   border-radius: 4px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3);
-  min-width: 249px;
+  width: 267px;
   height: 331px;
   margin-top: 10px;
   overflow-x: hidden;
@@ -568,16 +569,15 @@ input[type="text"] {
 .search-results {
   background-color: #f4f4f4;
   border-radius: 4px;
-
+  border: 1px solid #9b9b9b;
+  width: 250px;
   height: 38px;
   display: flex;
   align-items: center;
-
+  justify-content: space-between;
   padding-left: 10px;
   button {
-    border: 0;
-    outline: 0;
-    cursor: pointer;
+    padding-right: 15px;
   }
 
   input {
