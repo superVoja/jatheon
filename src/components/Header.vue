@@ -1,9 +1,10 @@
 <template>
   <div class="header">
-    <div class="search">
+    <!-- <div class="search">
       <img src="../assets/icons/icn-search.svg" alt="" />
       <input type="text" placeholder="Search for a word or phrase" />
-    </div>
+    </div> -->
+    <Searchbar class="search" />
     <div class="profile">
       <div class="avatar" :class="{ active: showMenu }">
         <span :class="{ active: showMenu }">JD</span>
@@ -21,12 +22,14 @@
 </template>
 <script>
 import Dropdown from "./Dropdown.vue";
+import Searchbar from "./Searchbar.vue";
 export default {
   name: "Header",
-  components: { Dropdown },
+  components: { Dropdown, Searchbar },
   data() {
     return {
       showMenu: false,
+      input: "",
       links: [
         {
           title: "Account Settings",
@@ -51,33 +54,27 @@ export default {
       ],
     };
   },
+  methods: {
+    // clearInput() {
+    //   console.log("clearinput");
+    //   this.input = "";
+    // },
+  },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 $small: 300px;
 $medium: 900px;
 $large: 1300px;
-.header {
+.search {
+  background-color: #f4f4f4;
+  border-radius: 4px;
   display: flex;
-  justify-content: space-between;
-  background: #fff;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-bottom: 1px solid #cfcfcf;
+  align-items: center;
 
-  .search {
-    background-color: #f4f4f4;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-
-    img {
-      padding: 10px;
-    }
+  img {
+    padding: 10px;
   }
-
   input {
     background-color: inherit;
     border-radius: inherit;
@@ -101,6 +98,18 @@ $large: 1300px;
       text-align: left;
     }
   }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid #cfcfcf;
+
   .profile {
     display: flex;
     justify-content: center;

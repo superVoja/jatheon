@@ -36,6 +36,12 @@ ul {
   margin: 0;
   padding: 0;
 }
+.icon {
+  fill: #9b9b9b;
+  &:hover {
+    fill: #00a88d;
+  }
+}
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
