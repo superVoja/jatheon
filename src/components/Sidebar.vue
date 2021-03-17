@@ -39,6 +39,7 @@
       text-align: left;
       text-decoration: none;
       display: flex;
+      font-weight: 700;
     }
 
     span {

@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       showMenu: false,
-      input: "",
       links: [
         {
           title: "Account Settings",
@@ -72,6 +71,9 @@ $large: 1300px;
   display: flex;
   align-items: center;
 
+  .icon {
+    fill: #9b9b9b;
+  }
   img {
     padding: 10px;
   }

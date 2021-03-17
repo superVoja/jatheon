@@ -116,7 +116,11 @@
       <button
         class="dropdown-btn"
         @click="showActionDropdown = !showActionDropdown"
-        :class="{ active: showActionDropdown, selected: !userIds.length < 1 }"
+        :class="{
+          active: showActionDropdown,
+          selected: !userIds.length < 1,
+          disabled: !userIds.length < 1,
+        }"
         :disabled="userIds.length < 1"
       >
         <p v-if="!actionIds.length">No actions selected</p>
@@ -218,7 +222,11 @@
       </button>
     </div>
     <div>
-      <button class="search-btn" :class="{ active: userIds.length > 0 }">
+      <button
+        class="search-btn"
+        :disabled="userIds.length < 1"
+        :class="{ active: userIds.length > 0 }"
+      >
         Search Now
       </button>
     </div>
@@ -415,7 +423,7 @@ $large: 1300px;
   }
 }
 .dropdown-btn {
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   border: 1px solid #cfcfcf;
   color: #9b9b9b;
   border-radius: 4px;
@@ -428,9 +436,13 @@ $large: 1300px;
   justify-content: space-between;
   position: relative;
 
+  .disabled {
+    background-color: #f4f4f4;
+  }
+
   &.selected {
     background-color: #ffffff;
-    border: 1px solid #00a88d;
+    //border: 1px solid #00a88d;
     color: #3e4543;
   }
   .btn-arrow {
@@ -484,6 +496,7 @@ $large: 1300px;
         line-height: 18px;
       }
     }
+
     li {
       color: #3e4543;
       display: flex;
@@ -493,14 +506,16 @@ $large: 1300px;
       line-height: 18px;
       padding-top: 10px;
 
-      &:first-child {
-        margin-top: 10px;
+      &:nth-child(2) {
+        margin-top: 5px;
       }
+
       label {
         color: #3e4543;
         font-size: 14px;
         line-height: 18px;
         width: 100%;
+        margin: 0;
         text-align: left;
 
         &:hover {
@@ -548,7 +563,7 @@ input[type="text"] {
     background-color: #00a88d;
     color: #ffffff;
   }
-  &:hover {
+  &:hover:enabled {
     background-color: #67c8c7;
   }
 }
