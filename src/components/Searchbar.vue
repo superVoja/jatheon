@@ -15,10 +15,5 @@ export default {
       input: "",
     };
   },
-  methods: {
-    clearInput() {
-      this.input = "";
-    },
-  },
 };
 </script>

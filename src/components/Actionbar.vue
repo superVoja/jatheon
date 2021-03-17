@@ -548,6 +548,9 @@ input[type="text"] {
     background-color: #00a88d;
     color: #ffffff;
   }
+  &:hover {
+    background-color: #67c8c7;
+  }
 }
 
 .search-results {
