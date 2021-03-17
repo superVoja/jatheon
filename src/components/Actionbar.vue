@@ -555,6 +555,7 @@ input[type="text"] {
   width: 113px;
   padding: 9px 15px;
   color: #9b9b9b;
+  font-weight: 700;
   font-size: 14px;
   line-height: 20px;
   text-align: center;
