@@ -27,6 +27,15 @@ button {
   border: 0;
   cursor: pointer;
 }
+input {
+  outline: 0;
+  border: 0;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;

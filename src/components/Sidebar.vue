@@ -27,20 +27,16 @@
   }
 
   ul {
-    list-style: none;
-    margin: 0;
     padding-top: 47px;
     padding-left: 23px;
   }
   li {
     a {
       color: #00a88d;
-      font-family: OpenSans;
       font-size: 14px;
       line-height: 18px;
       width: 180px;
       text-align: left;
-
       text-decoration: none;
       display: flex;
     }

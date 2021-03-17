@@ -120,7 +120,8 @@
         :disabled="userIds.length < 1"
       >
         <p v-if="!actionIds.length">No actions selected</p>
-        <p v-else>{{ actionIds.length }} selected</p>
+
+        <p v-else-if="actionIds.length > 0">{{ actionIds.length }} selected</p>
 
         <div class="btn-arrow" :class="{ active: showActionDropdown }">
           <img src="../assets/icons/icn-arrow-down.svg" alt="" />
@@ -157,11 +158,12 @@
       </div>
     </div>
     <!-- SEARCH -->
-    <div class="search-results">
+    <div class="search-results" :class="{ active: !userIds.length < 1 }">
       <input
         type="text"
         placeholder="Filter results..."
         v-model="searchResults"
+        :disabled="userIds.length < 1"
       />
       <button v-show="searchResults" @click="clearSearchInput">
         <svg
@@ -303,10 +305,10 @@ export default {
 $small: 300px;
 $medium: 900px;
 $large: 1300px;
+
 /* Scrollbar Style */
 ::-webkit-scrollbar {
   width: 6px;
-  margin-top: 60px;
   background-color: #f4f4f4;
   border-radius: 5px;
 }
@@ -326,6 +328,7 @@ $large: 1300px;
 ::-webkit-scrollbar-thumb:hover {
   background: #00a88d;
 }
+/* SVG Style */
 .icon {
   fill: #9b9b9b;
   &:hover {
@@ -357,7 +360,6 @@ $large: 1300px;
     box-sizing: border-box;
     position: absolute;
     opacity: 0;
-
     cursor: pointer;
   }
 
@@ -401,10 +403,8 @@ $large: 1300px;
   background-color: #ffffff;
   display: grid;
   grid-template-columns: 1fr;
-
   grid-gap: 10px;
   align-items: center;
-
   border-bottom: 1px solid #cfcfcf;
   padding: 16px 0px 16px 20px;
   @media screen and (min-width: $medium) {
@@ -415,18 +415,14 @@ $large: 1300px;
   }
 }
 .dropdown-btn {
-  cursor: pointer;
   background-color: #f4f4f4;
   border: 1px solid #cfcfcf;
-
   color: #9b9b9b;
   border-radius: 4px;
   min-width: 267px;
   height: 38px;
-  outline: 0;
   padding-right: 14px;
   padding-left: 12px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -468,31 +464,24 @@ $large: 1300px;
   height: 331px;
   margin-top: 10px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 12px 13px;
   position: absolute;
 
   ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     .search-user {
       background-color: #f4f4f4;
       border-radius: 4px;
-
       height: 38px;
       display: flex;
       align-items: center;
-
       padding-left: 10px;
-      button {
-        border: 0;
-        outline: 0;
-        cursor: pointer;
-      }
 
       input {
         margin-left: 7px;
+        color: #3e4543;
+        font-size: 14px;
+        line-height: 18px;
       }
     }
     li {
@@ -509,7 +498,6 @@ $large: 1300px;
       }
       label {
         color: #3e4543;
-
         font-size: 14px;
         line-height: 18px;
         width: 100%;
@@ -527,8 +515,6 @@ $large: 1300px;
 input[type="text"] {
   background-color: #f4f4f4;
   border-radius: 4px;
-  border: 0;
-  outline: 0;
 
   &::placeholder {
     padding-top: 10px;
@@ -557,8 +543,6 @@ input[type="text"] {
   font-size: 14px;
   line-height: 20px;
   text-align: center;
-  border: 0;
-  outline: 0;
 
   &.active {
     background-color: #00a88d;
@@ -570,18 +554,32 @@ input[type="text"] {
   background-color: #f4f4f4;
   border-radius: 4px;
   border: 1px solid #9b9b9b;
-  width: 250px;
+  width: 267px;
   height: 38px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-left: 10px;
+
+  &.active {
+    background-color: #ffffff;
+    border: 1px solid #9b9b9b;
+    &:hover {
+      border-color: #00a88d;
+    }
+  }
   button {
     padding-right: 15px;
+    background-color: inherit;
   }
 
   input {
+    color: #3e4543;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: inherit;
     margin-left: 7px;
+    cursor: pointer;
   }
 }
 </style>

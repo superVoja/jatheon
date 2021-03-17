@@ -2,7 +2,7 @@
   <div class="menu">
     <ul>
       <li>administrator</li>
-      <li>mike.andrew@jatheon.com</li>
+      <li>john.doe@jatheon.com</li>
       <li>Jatheon Technologies</li>
     </ul>
     <div class="menu-item" v-for="(item, i) in items" :key="i">
@@ -27,9 +27,6 @@ export default {
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3);
 
   ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     border-bottom: 1px solid #cfcfcf;
   }
 
@@ -41,7 +38,6 @@ export default {
 
     &:first-child {
       color: #9b9b9b;
-
       font-weight: 700;
       font-size: 11px;
       letter-spacing: 0.3px;
@@ -68,7 +64,7 @@ export default {
       line-height: 18px;
       width: 206px;
       text-align: left;
-      transition: 0.2s ease-in;
+      transition: 0.1s ease-in;
 
       &:hover {
         color: #00a88d;

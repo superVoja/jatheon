@@ -6,7 +6,7 @@
     </div>
     <div class="profile">
       <div class="avatar" :class="{ active: showMenu }">
-        <span :class="{ active: showMenu }">MA</span>
+        <span :class="{ active: showMenu }">JD</span>
       </div>
       <button
         class="menu-btn"
@@ -71,6 +71,7 @@ $large: 1300px;
     background-color: #f4f4f4;
     border-radius: 4px;
     display: flex;
+    align-items: center;
 
     img {
       padding: 10px;
@@ -78,14 +79,18 @@ $large: 1300px;
   }
 
   input {
-    border: 0;
-    outline: 0;
     background-color: inherit;
     border-radius: inherit;
-    width: 239px;
+    width: 237px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #9b9b9b;
+    font-size: 14px;
+    line-height: 18px;
 
     @media screen and (min-width: $medium) {
-      width: 515px;
+      width: 500px;
     }
 
     &::placeholder {
@@ -123,7 +128,7 @@ $large: 1300px;
         width: 32px;
         display: block;
         font-weight: 700;
-        transition: 0.3s ease-in;
+        transition: 0.2s ease-in;
 
         &.active {
           color: #00a88d;
@@ -132,10 +137,8 @@ $large: 1300px;
     }
 
     .menu-btn {
-      border: 0;
-      outline: 0;
       background-color: transparent;
-      transition: 0.3s ease-in;
+      transition: 0.2s ease-in;
       position: relative;
       &.active {
         transform: rotate(180deg);
@@ -145,12 +148,6 @@ $large: 1300px;
       position: absolute;
       right: 20px;
       top: 56px;
-      @media screen and (max-width: $small) {
-        right: 5px;
-      }
-      @media screen and (min-width: $medium) {
-        right: 0;
-      }
     }
   }
 }
