@@ -1,9 +1,5 @@
 <template>
   <div class="header">
-    <!-- <div class="search">
-      <img src="../assets/icons/icn-search.svg" alt="" />
-      <input type="text" placeholder="Search for a word or phrase" />
-    </div> -->
     <Searchbar class="search" />
     <div class="profile">
       <div class="avatar" :class="{ active: showMenu }">
