@@ -8,10 +8,11 @@
         :class="{ active: showUserDropdown, selected: !userIds.length < 1 }"
       >
         <p v-if="!userIds.length">No user selected</p>
+        <p v-else-if="selectAll === true || userIds.length > 8">All users</p>
         <p v-else>{{ userIds[0] }}</p>
 
         <div class="btn-arrow" :class="{ active: showUserDropdown }">
-          <img src="../assets/icons/icn-arrow-down.svg" alt="" />
+          <img src="@/assets/icons/icn-arrow-down.svg" alt="" />
         </div>
       </button>
       <div class="dropdown" v-if="showUserDropdown">
@@ -22,7 +23,6 @@
               type="text"
               placeholder="Search for a user..."
               v-model="search"
-              v-if="showUserDropdown"
               v-on:input="showSelectAll = !showSelectAll"
             />
             <button v-show="search" @click="clearInput">
@@ -83,15 +83,10 @@
             </button>
           </div>
 
-          <li v-if="showSelectAll">
+          <li v-if="!search">
             <label class="checkbox-wrapp"
               >Select all
-              <input
-                type="checkbox"
-                @click="selectAll"
-                v-model="allSelected"
-                v-if="showUserDropdown"
-              />
+              <input type="checkbox" @click="selectAll" v-model="allSelected" />
               <span class="checkmark"></span>
             </label>
           </li>
@@ -124,6 +119,9 @@
         :disabled="userIds.length < 1"
       >
         <p v-if="!actionIds.length">No actions selected</p>
+        <p v-else-if="selectAllActions === true || actionIds.length > 10">
+          All actions
+        </p>
 
         <p v-else-if="actionIds.length > 0">{{ actionIds.length }} selected</p>
 
@@ -224,8 +222,8 @@
     <div>
       <button
         class="search-btn"
-        :disabled="userIds.length < 1"
-        :class="{ active: userIds.length > 0 }"
+        :disabled="!searchResults"
+        :class="{ active: searchResults }"
       >
         Search Now
       </button>
@@ -279,7 +277,7 @@ export default {
     selectAll() {
       this.userIds = [];
       if (!this.allSelected) {
-        for (this.user in this.filteredList) {
+        for (this.user in this.users) {
           this.userIds.push(this.users[this.user].text.toString());
         }
       }
